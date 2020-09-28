@@ -1,0 +1,86 @@
+P29
+条件分岐と繰り返し
+for year in [1950, 2000, 2020]:
+    if year < 1989:
+        print('昭和')
+    elif year < 2019:
+        print('平成')
+    else:
+        print('令和')
+
+P30
+例外処理
+try:
+    1 / 0
+except ZeroDivisionError:
+    print('０で割れません')
+
+
+P30
+内包表記
+まずは通常の繰り返し処理でリスト内にある文字列の長さのリストを生成する
+names = ['spam', 'ham', 'eggs']
+lens = []
+for name in names:
+    lens.append(len(name))
+lens
+
+次に同じ処理をリスト内包表記では以下のように記述できます。
+[len(name) for name in names] #文字列の長さのリストを作成
+
+セット内包表記は{}で定義できる
+{len(name) for name in names} #文字列の長さのセットを作成。
+
+同様に辞書内包表記は{}で囲んでkey:valueを定義します。
+{name: len(name) for name in names} #文字列とその長さの辞書を作成。
+
+内包表記では条件式やネストも可能ですが、複雑になりすぎる場合はfor文を使いましょう
+[x*x for x in range(10) if x % 2 == 0]
+[[(y, x*x) for x in range(10) if x % 2 == 0]
+for y in range(3)]
+
+
+P32
+ジェネレーター式
+L = [x*x for x in range(100000)] #10万までの２乗のリストを作成
+type(L), len(L) #型と要素数を確認
+g = (x*x for x in range(100000)) #ジェネレータ式で定義
+type(g) #型を確認
+
+
+P33
+ファイル入出力
+with open('sample.txt', 'w', encoding='utf-8') as f: #ファイル書き込み
+    f.write('こんにちは\n')
+    f.write('Python\n')
+f.closed #ファイルが閉じていることを確認
+
+with open('sample.txt', encoding='utf-8') as f:
+    data = f.read()
+data
+
+
+P34
+文字列操作
+s1 = 'hello python'
+s1.upper(), s1.lower(), s1.title() #文字列の大文字小文字を変換
+
+s1.replace('hello', 'Hi') #文字列を置換
+
+s2 = '    spam  ham     eggs   '
+s2.split() #文字列を空白文字で分割
+
+s2.strip() #左右の文字列を削除
+
+s3 = 'sample.jpg'
+s3.endswith(('jpg', 'gif', 'png')) #文字列の末尾をチェック
+
+'123456789'.isdigit() # 文字列の数値の文字列かをチェック
+'test'.isdigit() # 文字列の数値の文字列かをチェック
+
+len(s1) #文字列の長さを取得
+
+'py' in s1 #文字列の中に任意の文字列が存在するかをチェック
+
+
+
