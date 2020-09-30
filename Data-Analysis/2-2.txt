@@ -100,4 +100,61 @@ prog.search('Python') #マッチする場合はmatchオブジェクトを返す�
 
 prog.search('Spam') #マッチしない場合はNoneを返す。
 
+P37
+loggingモジュール
+import logging
+logging.basicConfig(
+    filename='example.log', #出力ファイルを指定
+    level=logging.INFO, #ログレベルを指定
+    format='%(asctime)s:%levelname)s:%(message)s'
+)
 
+logging.debug('デバッグレベル')
+logging.info('INFOレベル')
+logging.warning('警告レベル')
+logging.error('エラーレベル')
+logging.critical('重大なエラー')
+
+P38
+datetimeモジュール
+from datetime import datetime, date
+datetime.now() #現在日時を取得
+date.today() #今日の日付を取得
+date.today() -date(2008, 12, 3) #Python 3.0リリースから日数を計算
+datetime.now().isoformat() #IS08601形式の文字列を取得
+date.today().strftime('%Y年%m月%d日') #日付を文字列に変換
+datetime.strptime('2018年7月11日', '%Y年%m月%d日') #日付を日時に変換
+
+
+P40
+pickleモジュール
+import pickle
+d = {'today': date.today(), #辞書データを定義
+    'delta': date(2019, 1, 1) - date.today()}
+d
+pickle.dumps(d) #直列化した情報を確認
+
+with open('date.pkl', 'wb') as f: #ファイルをバイト書き込みモードで開く
+    pickle.dump(d, f) #Pickle形式のデータを保存
+    
+with open('date.pkl', 'rb') as f: #ファイルをバイト読み込みモードで開く
+    new_d = pickle.load(f) #Pickle形式のデータを読み込む
+new_d #元のデータ(d)と同じことを確認
+
+
+P41
+pathlibモジュール
+from pathlib import Path
+p = Path() #Pathオブジェクトを現在のディレクトリで生成
+p
+
+for filepath in p.glob('*.txt'): # .txtファイルを順番に開いて読み込む
+    with open(filepath, encoding='utf-8') as f:
+	data = f.read()
+p = Path('/spam')
+p / 'ham' / 'eggs.txt' #/演算子でパスを作成
+
+p = Path('date.pkl')
+p.exists() #ファイルの存在をチェック
+
+p.is_dir() #ディレクトかをチェック
